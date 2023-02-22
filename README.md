@@ -1,3 +1,3 @@
 # dev_flutter
 
-A new Flutter project.
+Projeto feito para voltar aos estudos sobre o flutter
