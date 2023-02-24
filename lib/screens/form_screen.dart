@@ -21,7 +21,7 @@ class _FormScreenState extends State<FormScreen> {
       child: Scaffold(
         appBar: AppBar(
             title: const Text('Nova tarefa'),
-            leading: Container(color: Colors.blue)),
+        ),
         body: Center(
           child: SingleChildScrollView(
             child: Container(
@@ -131,6 +131,8 @@ class _FormScreenState extends State<FormScreen> {
                               backgroundColor: Colors.green,
                             ),
                           );
+
+                          Navigator.pop(context);
 
                           nameController.text = '';
                           difficultyController.text = '';
