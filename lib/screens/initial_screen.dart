@@ -1,4 +1,4 @@
-import 'package:dev_flutter/components/task.dart';
+import 'package:dev_flutter/data/task_inherited.dart';
 import 'package:dev_flutter/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,23 +18,15 @@ class _InitialScreenState extends State<InitialScreen> {
         title: const Text('Tarefas'),
       ),
       body: ListView(
-        children: const [
-          Task('Aprender Flutter', 'assets/images/loki.jpg', 1),
-          Task('Violão', 'assets/images/loki.jpg', 4),
-          Task('Rezar', 'assets/images/loki.jpg', 1),
-          Task('História', 'assets/images/loki.jpg', 5),
-          Task('Jogar', 'assets/images/loki.jpg', 2),
-          SizedBox(
-            height: 80,
-          )
-        ],
+        padding: const EdgeInsets.only(top: 8, bottom: 60),
+        children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const FormScreen(),
+                  builder: (newContext) => FormScreen(taskContext: context,),
               ),
             );
           },

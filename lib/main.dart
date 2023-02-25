@@ -1,4 +1,4 @@
-import 'package:dev_flutter/screens/form_screen.dart';
+import 'package:dev_flutter/data/task_inherited.dart';
 import 'package:dev_flutter/screens/initial_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +11,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: InitialScreen(),
+    return MaterialApp(
+      home: TaskInherited(child: const InitialScreen()),
     );
   }
 }
