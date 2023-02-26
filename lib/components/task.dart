@@ -1,4 +1,5 @@
 import 'package:dev_flutter/components/difficulty.dart';
+import 'package:dev_flutter/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget {
@@ -15,7 +16,6 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,7 +58,7 @@ class _TaskState extends State<Task> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 200,
+                            width: 150,
                             child: Text(
                               widget.nome,
                               style: const TextStyle(
@@ -66,29 +66,64 @@ class _TaskState extends State<Task> {
                                   overflow: TextOverflow.ellipsis),
                             ),
                           ),
-                          Difficulty(dificultyLevel: widget.dificuldade,)
+                          Difficulty(
+                            dificultyLevel: widget.dificuldade,
+                          )
                         ],
                       ),
-                      SizedBox(
-                        height: 52,
-                        width: 52,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                widget.nivel++;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Icon(Icons.arrow_drop_up),
-                                Text(
-                                  'Up',
-                                  style: TextStyle(color: Colors.white),
-                                )
-                              ],
-                            )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            width: 60,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    widget.nivel++;
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: const [
+                                    Icon(Icons.arrow_drop_up),
+                                    Text(
+                                      'Up',
+                                      style: TextStyle(color: Colors.white),
+                                    )
+                                  ],
+                                )),
+                          ),
+                          SizedBox(
+                            height: 50,
+                            width: 60,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red,
+                                  onPrimary: Colors.redAccent,
+                                ),
+                                onPressed: () {
+                                  TaskDao().delete(widget.nome);
+                                },
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: const [
+                                    Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      'Del',
+                                      style: TextStyle(color: Colors.white),
+                                    )
+                                  ],
+                                )),
+                          ),
+                        ],
                       )
                     ],
                   ),
@@ -109,7 +144,8 @@ class _TaskState extends State<Task> {
                       ),
                       Text(
                         'Nível: ${widget.nivel}',
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ],
                   ),

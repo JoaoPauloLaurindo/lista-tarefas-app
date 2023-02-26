@@ -1,4 +1,5 @@
 import 'package:dev_flutter/components/task.dart';
+import 'package:dev_flutter/data/task_dao.dart';
 import 'package:dev_flutter/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
@@ -18,18 +19,17 @@ class _FormScreenState extends State<FormScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  bool isNullOrEmpty(String? text){
-    if(text != null && text.isEmpty){
+  bool isNullOrEmpty(String? text) {
+    if (text != null && text.isEmpty) {
       return true;
     }
 
     return false;
   }
 
-  bool dificultyValidator(String? text){
-    if(text != null && text.isEmpty){
-      if(int.parse(text) > 5 ||
-          int.parse(text) < 1){
+  bool dificultyValidator(String? text) {
+    if (text != null && text.isEmpty) {
+      if (int.parse(text) > 5 || int.parse(text) < 1) {
         return true;
       }
     }
@@ -146,10 +146,18 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          TaskInherited.of(widget.taskContext).newTask(Task(
+                          // TaskInherited.of(widget.taskContext).newTask(Task(
+                          //     nameController.text,
+                          //     imageController.text,
+                          //     int.parse(difficultyController.text)));
+
+                          TaskDao().save(
+                            Task(
                               nameController.text,
                               imageController.text,
-                              int.parse(difficultyController.text)));
+                              int.parse(difficultyController.text),
+                            ),
+                          );
 
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
